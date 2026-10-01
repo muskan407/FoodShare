@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ==================== REGISTER PAGE ==================== -->
+
+<main class="register-page">
+
+    <div class="register-card">
+
+        <form id="registerForm">
+
+            <!-- FoodShare Logo -->
+
+            <a href="index.html" class="register-logo">
+                FoodShare
+            </a>
+
+
+            <h1>Create Your Account</h1>
+
+            <p class="register-subtitle">
+                Join FoodShare and help turn surplus food into hope.
+            </p>
+
+
+            <!-- ==================== ROLE SELECTION ==================== -->
+
+            <div class="register-role-selection">
+
+                <p class="register-role-label">
+                    Register as
+                </p>
+
+                <div class="register-role-options">
+
+                    <label class="register-role-option">
+
+                        <input
+                            type="radio"
+                            name="role"
+                            value="donor"
+                            checked
+                        >
+
+                        <span>Donor</span>
+
+                    </label>
+
+
+                    <label class="register-role-option">
+
+                        <input
+                            type="radio"
+                            name="role"
+                            value="ngo"
+                        >
+
+                        <span>NGO</span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================== DONOR REGISTRATION ==================== -->
+
+            <section class="donor-registration">
+
+                <h2>Donor Information</h2>
+
+
+                <div class="register-form-group">
+
+                    <label for="donor-name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="donor-name"
+                        name="donor-name"
+                        placeholder="Enter your full name"
+                    >
+
+                </div>
+
+
+                <div class="register-form-group">
+
+                    <label for="donor-email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="donor-email"
+                        name="donor-email"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <div class="register-form-group">
+
+                    <label for="donor-phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="donor-phone"
+                        name="donor-phone"
+                        placeholder="Enter your phone number"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== NGO REGISTRATION ==================== -->
+
+            <section class="ngo-registration">
+
+                <h2>NGO Information</h2>
+
+
+                <!-- NGO NAME -->
+
+                <div class="register-form-group">
+
+                    <label for="ngo-name">
+                        NGO / Organization Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ngo-name"
+                        name="ngo-name"
+                        placeholder="Enter organization name"
+                    >
+
+                </div>
+
+
+                <!-- CONTACT PERSON -->
+
+                <div class="register-form-group">
+
+                    <label for="contact-name">
+                        Contact Person Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="contact-name"
+                        placeholder="Enter contact person's name"
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="register-form-group">
+
+                    <label for="ngo-email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="ngo-email"
+                        name="ngo-email"
+                        placeholder="Enter NGO email"
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="register-form-group">
+
+                    <label for="ngo-phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="ngo-phone"
+                        name="ngo-phone"
+                        placeholder="Enter NGO phone number"
+                    >
+
+                </div>
+
+
+                <!-- REGISTRATION ID -->
+
+                <div class="register-form-group">
+
+                    <label for="ngo-id">
+                        Registration / NGO ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ngo-id"
+                        name="ngo-id"
+                        placeholder="Enter NGO registration ID"
+                    >
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="register-form-group">
+
+                    <label for="ngo-location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ngo-location"
+                        name="ngo-location"
+                        placeholder="Enter NGO location"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== PASSWORD ==================== -->
+
+            <div class="register-form-group">
+
+                <label for="register-password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="register-password"
+                    name="password"
+                    placeholder="Create a password"
+                >
+
+            </div>
+
+
+            <div class="register-form-group">
+
+                <label for="confirm-password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    placeholder="Confirm your password"
+                >
+
+            </div>
+
+
+            <!-- ==================== TERMS ==================== -->
+
+            <div class="terms-section">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        required
+                    >
+
+                    I agree to the Terms and Conditions.
+
+                </label>
+
+            </div>
+
+
+            <!-- ==================== CREATE ACCOUNT ==================== -->
+
+            <button
+                type="submit"
+                class="register-button"
+            >
+                Create Account
+            </button>
+
+
+            <!-- ==================== LOGIN LINK ==================== -->
+
+            <p class="already-account">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </p>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<!-- ==================== JAVASCRIPT ==================== -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

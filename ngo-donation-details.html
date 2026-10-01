@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Donation Details - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="ngo-detail-page">
+
+    <header class="ngo-detail-header">
+
+        <a href="ngo-dashboard.html"
+           class="ngo-detail-logo">
+            FoodShare
+        </a>
+
+        <a href="ngo-dashboard.html"
+           class="ngo-detail-back">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <main class="ngo-detail-main">
+
+        <div class="ngo-detail-title">
+
+            <span class="detail-label">
+                AVAILABLE DONATION
+            </span>
+
+            <h1 id="detailFoodName">
+                Loading...
+            </h1>
+
+            <p>
+                Posted by a FoodShare donor
+            </p>
+
+        </div>
+
+
+        <div class="ngo-detail-card">
+
+
+            <!-- FOOD IMAGE -->
+
+            <div class="food-detail-image"
+                 id="foodDetailImage">
+
+                Loading image...
+
+            </div>
+
+
+            <!-- FOOD CONTENT -->
+
+            <div class="food-detail-content">
+
+                <div class="detail-status"
+                     id="detailStatus">
+                    Available
+                </div>
+
+
+                <h2 id="detailFoodName2">
+                    Loading...
+                </h2>
+
+
+                <p class="food-description"
+                   id="detailDescription">
+                    Loading...
+                </p>
+
+
+                <div class="food-info-grid">
+
+
+                    <div>
+
+                        <span>Quantity</span>
+
+                        <strong id="detailQuantity">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Food Category</span>
+
+                        <strong id="detailCategory">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Prepared</span>
+
+                        <strong id="detailPrepared">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Best Before</span>
+
+                        <strong id="detailBestBefore">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Pickup Location</span>
+
+                        <strong id="detailLocation">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Contact</span>
+
+                        <strong id="detailContact">
+                            Available after acceptance
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="food-safety-note">
+
+                    <strong>
+                        Food Safety
+                    </strong>
+
+                    <p>
+                        The donor has confirmed that the
+                        food is safe for consumption and
+                        has been stored properly.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="accept-food-button"
+                    id="acceptDonationButton">
+
+                    Accept Donation
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const donationId =
+    params.get("id");
+
+
+const imageContainer =
+    document.getElementById("foodDetailImage");
+
+
+if (!donationId) {
+
+    alert("Donation ID not found.");
+
+    window.location.href =
+        "ngo-dashboard.html";
+}
+
+
+fetch(
+    `http://127.0.0.1:5000/api/donations/${donationId}`
+)
+
+.then(response => {
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Donation not found"
+        );
+
+    }
+
+    return response.json();
+
+})
+
+
+.then(donation => {
+
+    // ==================== FOOD NAME ====================
+
+    document.getElementById(
+        "detailFoodName"
+    ).textContent =
+        donation.food_name;
+
+
+    document.getElementById(
+        "detailFoodName2"
+    ).textContent =
+        donation.food_name;
+
+
+    // ==================== DESCRIPTION ====================
+
+    document.getElementById(
+        "detailDescription"
+    ).textContent =
+        donation.description ||
+        "No description provided.";
+
+
+    // ==================== STATUS ====================
+
+    document.getElementById(
+        "detailStatus"
+    ).textContent =
+        donation.status;
+
+
+    // ==================== QUANTITY ====================
+
+    document.getElementById(
+        "detailQuantity"
+    ).textContent =
+        `${donation.quantity} Meals`;
+
+
+    // ==================== CATEGORY ====================
+
+    document.getElementById(
+        "detailCategory"
+    ).textContent =
+        donation.category;
+
+
+    // ==================== PREPARED ====================
+
+    document.getElementById(
+        "detailPrepared"
+    ).textContent =
+        donation.prepared_date;
+
+
+    // ==================== BEST BEFORE ====================
+
+    document.getElementById(
+        "detailBestBefore"
+    ).textContent =
+        donation.best_before;
+
+
+    // ==================== LOCATION ====================
+
+    document.getElementById(
+        "detailLocation"
+    ).textContent =
+        `${donation.pickup_address}, ${donation.city}`;
+
+
+    // ==================== IMAGE ====================
+
+    if (donation.image_data) {
+
+        imageContainer.innerHTML = `
+            <img
+                src="${donation.image_data}"
+                alt="Food Image"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                    border-radius:12px;
+                "
+            >
+        `;
+
+    } else {
+
+        imageContainer.innerHTML = `
+            <div style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                height:100%;
+            ">
+                No food image available
+            </div>
+        `;
+
+    }
+
+
+    // ==================== ACCEPT ====================
+
+    const acceptButton =
+        document.getElementById(
+            "acceptDonationButton"
+        );
+
+
+    if (donation.status !== "Available") {
+
+        acceptButton.style.display =
+            "none";
+
+    }
+
+
+    acceptButton.addEventListener(
+        "click",
+        async function () {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `http://127.0.0.1:5000/api/donations/${donation.id}/accept`,
+                        {
+                            method: "PUT"
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                alert(
+                    data.message ||
+                    "Donation accepted."
+                );
+
+
+                if (response.ok) {
+
+                    window.location.href =
+                        "ngo-dashboard.html";
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+
+                alert(
+                    "Unable to accept donation."
+                );
+
+            }
+
+        }
+    );
+
+})
+
+
+.catch(error => {
+
+    console.error(
+        "Error loading donation:",
+        error
+    );
+
+    imageContainer.innerHTML =
+        "Unable to load donation.";
+
+});
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NGO Dashboard - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="ngo-dashboard">
+
+    <aside class="ngo-sidebar">
+
+        <a href="index.html" class="ngo-dashboard-logo">
+            FoodShare
+        </a>
+
+        <div class="ngo-user">
+            <div class="ngo-avatar">N</div>
+
+            <div>
+                <strong>NGO</strong>
+                <p>Organization</p>
+            </div>
+        </div>
+
+        <nav class="ngo-menu">
+
+            <a href="ngo-dashboard.html" class="ngo-menu-link active">
+                Dashboard
+            </a>
+
+            <a href="available-donations.html" class="ngo-menu-link">
+                Available Donations
+            </a>
+
+            <a href="accepted-donations.html" class="ngo-menu-link">
+                Accepted Donations
+            </a>
+
+            <a href="ngo-profile.html" class="ngo-menu-link">
+                Profile
+            </a>
+
+        </nav>
+
+        <a href="#" class="ngo-logout" onclick="logoutUser(); return false;">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <main class="ngo-dashboard-main">
+
+        <header class="ngo-dashboard-header">
+
+            <div>
+                <h1 id="welcomeNGO">Welcome, NGO!</h1>
+                <p>Manage food donations and help your community.</p>
+            </div>
+
+        </header>
+
+
+        <section class="ngo-stats">
+
+            <div class="ngo-stat-card">
+                <span>Available Donations</span>
+                <strong id="availableCount">0</strong>
+            </div>
+
+            <div class="ngo-stat-card">
+                <span>Accepted</span>
+                <strong id="acceptedCount">0</strong>
+            </div>
+
+            <div class="ngo-stat-card">
+                <span>Completed</span>
+                <strong id="completedCount">0</strong>
+            </div>
+
+            <div class="ngo-stat-card">
+                <span>People Helped</span>
+                <strong id="peopleHelpedCount">0</strong>
+            </div>
+
+        </section>
+
+
+        <section class="ngo-donations">
+
+            <h2>Available Food Donations</h2>
+
+            <div id="donationsContainer">
+                <p>Loading donations...</p>
+            </div>
+
+        </section>
+<section class="ngo-donations">
+
+    <h2>Accepted Donations</h2>
+
+    <div id="acceptedDonationsContainer">
+        <p>Loading accepted donations...</p>
+    </div>
+
+</section>
+    </main>
+
+</div>
+
+
+<!-- JavaScript MUST be at the end -->
+<script src="script.js"></script>
+
+</body>
+</html>

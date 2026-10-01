@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Donations - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="donor-dashboard">
+
+    <!-- ==================== SIDEBAR ==================== -->
+
+    <aside class="donor-sidebar">
+
+        <a href="index.html" class="dashboard-logo">
+            FoodShare
+        </a>
+
+        <div class="donor-profile">
+
+            <div class="profile-circle" id="donorInitial">
+                D
+            </div>
+
+            <div>
+                <strong id="donorName">Donor</strong>
+                <p>Food Contributor</p>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-menu">
+
+            <a href="donor-dashboard.html" class="dashboard-menu-link">
+                Dashboard
+            </a>
+
+            <a href="donate-food.html" class="dashboard-menu-link">
+                Donate Food
+            </a>
+
+            <a href="my-donations.html" class="dashboard-menu-link active">
+                My Donations
+            </a>
+
+            <a href="donor-profile.html" class="dashboard-menu-link">
+                Profile
+            </a>
+
+        </div>
+
+
+        <a href="#" class="ngo-logout" onclick="logoutUser(); return false;">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- ==================== MAIN ==================== -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>My Donations</h1>
+
+                <p>
+                    Track the food donations you have made.
+                </p>
+
+            </div>
+
+            <a href="donate-food.html" class="dashboard-donate-button">
+                Donate Food
+            </a>
+
+        </header>
+
+
+        <!-- ==================== DONATIONS ==================== -->
+
+        <section class="dashboard-section">
+
+            <h2>Your Food Donations</h2>
+
+            <div id="myDonationsContainer">
+
+                <p>Loading donations...</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+const donorEmail = localStorage.getItem("userEmail");
+
+const donorName = localStorage.getItem("userName");
+
+
+if (donorName) {
+
+    document.getElementById("donorName").textContent =
+        donorName;
+
+    document.getElementById("donorInitial").textContent =
+        donorName.charAt(0).toUpperCase();
+
+}
+
+
+const container =
+    document.getElementById("myDonationsContainer");
+
+
+if (!donorEmail) {
+
+    container.innerHTML =
+        "<p>Please login again to view your donations.</p>";
+
+} else {
+
+    fetch(
+        `http://127.0.0.1:5000/api/donations/my?email=${encodeURIComponent(donorEmail)}`
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "API Error: " + response.status
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(donations => {
+
+        container.innerHTML = "";
+
+
+        if (donations.length === 0) {
+
+            container.innerHTML = `
+                <div class="dashboard-card">
+                    <h3>No donations yet</h3>
+                    <p>
+                        Your food donations will appear here.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        donations.forEach(donation => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "available-donation";
+
+
+            let statusClass =
+                donation.status.toLowerCase();
+
+
+            card.innerHTML = `
+
+                <div>
+
+                    <h3>
+                        ${donation.food_name}
+                    </h3>
+
+                    <p>
+                        ${donation.quantity} meals •
+                        ${donation.city}
+                    </p>
+
+                    <small>
+                        Category: ${donation.category}
+                    </small>
+
+                    <br>
+
+                    <small>
+                        Best before:
+                        ${donation.best_before}
+                    </small>
+
+                </div>
+
+
+                <span class="status ${statusClass}">
+                    ${donation.status}
+                </span>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Error loading my donations:",
+            error
+        );
+
+        container.innerHTML = `
+            <p>
+                Unable to load your donations.
+            </p>
+        `;
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

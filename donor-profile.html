@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="donor-dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="donor-sidebar">
+
+        <a href="index.html" class="dashboard-logo">
+            FoodShare
+        </a>
+
+        <div class="donor-profile">
+
+            <div class="profile-circle" id="donorInitial">
+                D
+            </div>
+
+            <div>
+                <strong id="donorName">Donor</strong>
+                <p>Food Contributor</p>
+            </div>
+
+        </div>
+
+        <div class="dashboard-menu">
+
+            <a href="donor-dashboard.html" class="dashboard-menu-link">
+                Dashboard
+            </a>
+
+            <a href="donate-food.html" class="dashboard-menu-link">
+                Donate Food
+            </a>
+
+            <a href="my-donations.html" class="dashboard-menu-link">
+                My Donations
+            </a>
+
+            <a href="donor-profile.html" class="dashboard-menu-link active">
+                Profile
+            </a>
+
+        </div>
+
+        <a href="#" class="ngo-logout"
+           onclick="logoutUser(); return false;">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>My Profile</h1>
+
+                <p>
+                    Manage your FoodShare account information.
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <section class="profile-page">
+
+            <div class="profile-card">
+
+                <!-- PROFILE HEADER -->
+
+                <div class="profile-header">
+
+                    <div class="large-profile-circle"
+                         id="profileInitial">
+                        D
+                    </div>
+
+                    <h2 id="profileName">
+                        Loading...
+                    </h2>
+
+                    <p>
+                        Food Contributor
+                    </p>
+
+                </div>
+
+
+                <!-- PROFILE INFORMATION -->
+
+                <div class="profile-information">
+
+                    <div class="profile-info-box">
+
+                        <span>Full Name</span>
+
+                        <strong id="profileFullName">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-box">
+
+                        <span>Email Address</span>
+
+                        <strong id="profileEmail">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-box">
+
+                        <span>Phone Number</span>
+
+                        <strong id="profilePhone">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-box">
+
+                        <span>Location</span>
+
+                        <strong id="profileLocation">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EDIT BUTTON -->
+
+                <button
+                    type="button"
+                    class="edit-profile-button"
+                    id="editProfileButton">
+
+                    Edit Profile
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= EDIT PROFILE MODAL ================= -->
+
+<div class="profile-modal" id="profileModal">
+
+    <div class="profile-modal-content">
+
+        <h2>Edit Profile</h2>
+
+        <p class="modal-subtitle">
+            Update your FoodShare account information.
+        </p>
+
+
+        <form id="editProfileForm">
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="editName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="editName"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="editEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="editEmail"
+                    readonly
+                >
+
+                <small>
+                    Email cannot be changed.
+                </small>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label for="editPhone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="editPhone"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label for="editLocation">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="editLocation"
+                    placeholder="Enter your location"
+                >
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    id="cancelEdit"
+                    class="cancel-button">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-profile-button">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

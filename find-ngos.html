@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find NGOs - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="ngo-find-page">
+
+    <!-- HEADER -->
+    <header class="ngo-find-header">
+
+        <a href="index.html" class="ngo-find-logo">
+            FoodShare
+        </a>
+
+        <a href="donor-dashboard.html" class="ngo-find-back">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="ngo-find-main">
+
+        <div class="ngo-find-title">
+
+            <h1>Find NGOs</h1>
+
+            <p>
+                Connect with registered NGOs working to reduce
+                hunger and food waste.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+        <div class="ngo-search-box">
+
+            <input
+                type="text"
+                id="ngoSearch"
+                placeholder="Search NGO by name or location"
+            >
+
+            <button
+                type="button"
+                id="ngoSearchButton"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- NGO CARDS -->
+        <div
+            class="ngo-cards"
+            id="ngoCards"
+        >
+
+            <p>Loading NGOs...</p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const API_URL = "http://127.0.0.1:5000";
+
+let allNGOs = [];
+
+
+/* =========================
+   LOAD NGOs
+========================= */
+
+async function loadNGOs() {
+
+    const ngoCards =
+        document.getElementById("ngoCards");
+
+    try {
+
+        const response =
+            await fetch(`${API_URL}/api/ngos`);
+
+        if (!response.ok) {
+            throw new Error("Unable to load NGOs");
+        }
+
+        allNGOs =
+            await response.json();
+
+        displayNGOs(allNGOs);
+
+    } catch (error) {
+
+        console.error(
+            "NGO loading error:",
+            error
+        );
+
+        ngoCards.innerHTML = `
+            <p>
+                Unable to load NGOs right now.
+            </p>
+        `;
+    }
+}
+
+
+/* =========================
+   DISPLAY NGOs
+========================= */
+
+function displayNGOs(ngos) {
+
+    const ngoCards =
+        document.getElementById("ngoCards");
+
+
+    if (!ngos.length) {
+
+        ngoCards.innerHTML = `
+            <p>
+                No NGOs found.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    ngoCards.innerHTML = ngos.map(ngo => `
+
+        <article class="ngo-card">
+
+            <div class="ngo-icon">
+                🤝
+            </div>
+
+
+            <div class="ngo-card-info">
+
+                <h2>
+                    ${escapeHTML(ngo.name)}
+                </h2>
+
+
+                <p>
+                    📍
+                    ${escapeHTML(
+                        ngo.location ||
+                        "Location not provided"
+                    )}
+                </p>
+
+
+                <p>
+                    Helping communities by collecting
+                    surplus food and supporting people
+                    in need.
+                </p>
+
+
+                <div class="ngo-contact-info">
+
+                    <p>
+                        👤
+                        <strong>Contact Person:</strong>
+                        ${escapeHTML(
+                            ngo.contact_person ||
+                            "Not provided"
+                        )}
+                    </p>
+
+
+                    <p>
+                        📞
+                        <strong>Phone:</strong>
+                        ${escapeHTML(
+                            ngo.phone ||
+                            "Not provided"
+                        )}
+                    </p>
+
+
+                    <p>
+                        ✉️
+                        <strong>Email:</strong>
+                        ${escapeHTML(
+                            ngo.email
+                        )}
+                    </p>
+
+
+                    <p>
+                        🆔
+                        <strong>NGO ID:</strong>
+                        ${escapeHTML(
+                            ngo.ngo_id ||
+                            "Not provided"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <!-- CONTRIBUTION -->
+
+                <div class="ngo-contribution">
+
+                    <h3>
+                        Our Contribution
+                    </h3>
+
+
+                    <div class="ngo-stats">
+
+                        <span>
+                            🍱
+                            <strong>
+                                ${ngo.accepted_donations || 0}
+                            </strong>
+                            Donations Accepted
+                        </span>
+
+
+                        <span>
+                            ✅
+                            <strong>
+                                ${ngo.completed_donations || 0}
+                            </strong>
+                            Donations Completed
+                        </span>
+
+
+                        <span>
+                            ❤️
+                            <strong>
+                                ${ngo.people_helped || 0}
+                            </strong>
+                            People Helped
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT BUTTONS -->
+
+                <div class="ngo-contact-buttons">
+
+                    <a
+                        href="mailto:${encodeURIComponent(
+                            ngo.email
+                        )}"
+                        class="ngo-view-button"
+                    >
+                        ✉️ Email NGO
+                    </a>
+
+
+                    ${
+                        ngo.phone
+                        ? `
+                        <a
+                            href="tel:${ngo.phone}"
+                            class="ngo-call-button"
+                        >
+                            📞 Call NGO
+                        </a>
+                        `
+                        : ""
+                    }
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchNGOs() {
+
+    const searchInput =
+        document.getElementById("ngoSearch");
+
+    const searchText =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!searchText) {
+
+        displayNGOs(allNGOs);
+
+        return;
+    }
+
+
+    const filteredNGOs =
+        allNGOs.filter(ngo => {
+
+            const name =
+                (ngo.name || "")
+                .toLowerCase();
+
+            const location =
+                (ngo.location || "")
+                .toLowerCase();
+
+
+            return (
+                name.includes(searchText) ||
+                location.includes(searchText)
+            );
+
+        });
+
+
+    displayNGOs(filteredNGOs);
+}
+
+
+/* =========================
+   SEARCH BUTTON
+========================= */
+
+document
+    .getElementById("ngoSearchButton")
+    .addEventListener(
+        "click",
+        searchNGOs
+    );
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+document
+    .getElementById("ngoSearch")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                searchNGOs();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadNGOs();
+
+</script>
+
+</body>
+
+</html>

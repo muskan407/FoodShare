@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Dashboard - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================== DONOR DASHBOARD ==================== -->
+
+    <div class="donor-dashboard">
+
+        <!-- ==================== SIDEBAR ==================== -->
+
+        <aside class="donor-sidebar">
+
+            <a href="index.html" class="dashboard-logo">
+                FoodShare
+            </a>
+
+            <div class="donor-profile">
+
+                <div class="profile-circle" id="donorInitial">
+                    D
+                </div>
+
+                <div>
+                    <strong id="donorName">Donor</strong>
+                    <p>Food Contributor</p>
+                </div>
+
+            </div>
+
+
+            <!-- ==================== MENU ==================== -->
+
+            <div class="dashboard-menu">
+
+                <a href="donor-dashboard.html"
+                   class="dashboard-menu-link active">
+                    Dashboard
+                </a>
+
+                <a href="donate-food.html"
+                   class="dashboard-menu-link">
+                    Donate Food
+                </a>
+
+                <a href="my-donations.html"
+                   class="dashboard-menu-link">
+                    My Donations
+                </a>
+
+                <a href="donor-profile.html"
+                   class="dashboard-menu-link">
+                    Profile
+                </a>
+
+            </div>
+
+
+            <!-- ==================== LOGOUT ==================== -->
+
+            <a href="#"
+               class="dashboard-logout"
+               id="logoutButton"
+               onclick="logoutUser(); return false;">
+                Logout
+            </a>
+
+        </aside>
+
+
+        <!-- ==================== MAIN DASHBOARD ==================== -->
+
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+
+                <div>
+
+                    <h1 id="userWelcome">
+                        Welcome
+                    </h1>
+
+                    <p>
+                        Thank you for helping reduce food waste
+                        and feed people in need.
+                    </p>
+
+                </div>
+
+
+                <a href="donate-food.html"
+                   class="dashboard-donate-button">
+                    + Donate Food
+                </a>
+
+            </header>
+
+
+            <!-- ==================== IMPACT ==================== -->
+
+            <section class="dashboard-section">
+
+                <h2>Your Impact</h2>
+
+                <div class="impact-cards">
+
+
+                    <!-- Meals Donated -->
+
+                    <article class="dashboard-card">
+
+                        <div class="impact-icon">
+                            🍱
+                        </div>
+
+                        <h3>
+                            Meals Donated
+                        </h3>
+
+                        <strong id="donorMeals">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <!-- Accepted -->
+
+                    <article class="dashboard-card">
+
+                        <div class="impact-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Accepted
+                        </h3>
+
+                        <strong id="donorAccepted">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <!-- Completed -->
+
+                    <article class="dashboard-card">
+
+                        <div class="impact-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Completed
+                        </h3>
+
+                        <strong id="donorCompleted">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <!-- People Helped -->
+
+                    <article class="dashboard-card">
+
+                        <div class="impact-icon">
+                            ❤️
+                        </div>
+
+                        <h3>
+                            People Helped
+                        </h3>
+
+                        <strong id="donorPeopleHelped">
+                            0
+                        </strong>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== RECENT DONATIONS ==================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Recent Donations
+                        </h2>
+
+                        <p>
+                            Track your recent food donations.
+                        </p>
+
+                    </div>
+
+
+                    <a href="donate-food.html">
+                        Donate New Food
+                    </a>
+
+                </div>
+                       <div id="myDonationsContainer" class="recent-donations-container">
+</div>
+                
+            </section>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

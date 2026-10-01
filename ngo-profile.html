@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NGO Profile - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="ngo-profile-page">
+
+    <!-- ==================== HEADER ==================== -->
+
+    <header class="ngo-profile-header">
+
+        <a href="ngo-dashboard.html" class="ngo-profile-logo">
+            FoodShare
+        </a>
+
+        <a href="ngo-dashboard.html" class="ngo-profile-back">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- ==================== PROFILE ==================== -->
+
+    <main class="ngo-profile-main">
+
+        <section class="ngo-profile-card">
+
+            <!-- PROFILE ICON -->
+
+            <div class="ngo-profile-icon" id="ngoInitial">
+                N
+            </div>
+
+
+            <!-- NGO NAME -->
+
+            <h1 id="ngoName">
+                Loading...
+            </h1>
+
+
+            <!-- VERIFIED -->
+
+            <span class="verified-badge">
+                ✓ Verified NGO
+            </span>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="ngo-profile-description">
+                Helping communities by providing food and essential
+                support to people in need.
+            </p>
+
+
+            <!-- ==================== INFORMATION ==================== -->
+
+            <div class="ngo-profile-info">
+
+
+                <!-- REGISTRATION ID -->
+
+                <div>
+
+                    <span>
+                        Registration ID
+                    </span>
+
+                    <strong id="ngoId">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <!-- CONTACT PERSON -->
+
+                <div>
+
+                    <span>
+                        Contact Person
+                    </span>
+
+                    <strong id="contactPerson">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div>
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong id="ngoEmail">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div>
+
+                    <span>
+                        Phone
+                    </span>
+
+                    <strong id="ngoPhone">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div>
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong id="ngoLocation">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <!-- PEOPLE HELPED -->
+
+                <div>
+
+                    <span>
+                        People Helped
+                    </span>
+
+                    <strong id="peopleHelped">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==================== JAVASCRIPT ==================== -->
+
+<script src="script.js"></script>
+<script>
+
+async function loadNGOProfile() {
+
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) {
+        document.getElementById("ngoName").textContent =
+            "Please login first";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `http://127.0.0.1:5000/api/profile/${encodeURIComponent(email)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Profile not found");
+        }
+
+        // NGO NAME
+        document.getElementById("ngoName").textContent =
+            data.name || "Not available";
+
+        // PROFILE INITIAL
+        document.getElementById("ngoInitial").textContent =
+            data.name
+                ? data.name.charAt(0).toUpperCase()
+                : "N";
+
+        // REGISTRATION ID
+        document.getElementById("ngoId").textContent =
+            data.ngo_id || "Not available";
+
+        // CONTACT PERSON
+        document.getElementById("contactPerson").textContent =
+            data.contact_person || "Not available";
+
+        // EMAIL
+        document.getElementById("ngoEmail").textContent =
+            data.email || "Not available";
+
+        // PHONE
+        document.getElementById("ngoPhone").textContent =
+            data.phone || "Not available";
+
+        // LOCATION
+        document.getElementById("ngoLocation").textContent =
+            data.location || "Not available";
+
+        // PEOPLE HELPED
+        loadPeopleHelped();
+
+    } catch (error) {
+
+        console.error("Profile error:", error);
+
+        document.getElementById("ngoName").textContent =
+            "Unable to load profile";
+
+    }
+}
+
+
+async function loadPeopleHelped() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/donations/people-helped"
+        );
+
+        const data = await response.json();
+
+        document.getElementById("peopleHelped").textContent =
+            data.people_helped || 0;
+
+    } catch (error) {
+
+        console.error(
+            "People helped error:",
+            error
+        );
+
+        document.getElementById("peopleHelped").textContent =
+            "0";
+    }
+}
+
+
+loadNGOProfile();
+
+</script><script>
+
+async function loadNGOProfile() {
+
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) {
+        document.getElementById("ngoName").textContent =
+            "Please login first";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `http://127.0.0.1:5000/api/profile/${encodeURIComponent(email)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Profile not found");
+        }
+
+        // NGO NAME
+        document.getElementById("ngoName").textContent =
+            data.name || "Not available";
+
+        // PROFILE INITIAL
+        document.getElementById("ngoInitial").textContent =
+            data.name
+                ? data.name.charAt(0).toUpperCase()
+                : "N";
+
+        // REGISTRATION ID
+        document.getElementById("ngoId").textContent =
+            data.ngo_id || "Not available";
+
+        // CONTACT PERSON
+        document.getElementById("contactPerson").textContent =
+            data.contact_person || "Not available";
+
+        // EMAIL
+        document.getElementById("ngoEmail").textContent =
+            data.email || "Not available";
+
+        // PHONE
+        document.getElementById("ngoPhone").textContent =
+            data.phone || "Not available";
+
+        // LOCATION
+        document.getElementById("ngoLocation").textContent =
+            data.location || "Not available";
+
+        // PEOPLE HELPED
+        loadPeopleHelped();
+
+    } catch (error) {
+
+        console.error("Profile error:", error);
+
+        document.getElementById("ngoName").textContent =
+            "Unable to load profile";
+
+    }
+}
+
+
+async function loadPeopleHelped() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/donations/people-helped"
+        );
+
+        const data = await response.json();
+
+        document.getElementById("peopleHelped").textContent =
+            data.people_helped || 0;
+
+    } catch (error) {
+
+        console.error(
+            "People helped error:",
+            error
+        );
+
+        document.getElementById("peopleHelped").textContent =
+            "0";
+    }
+}
+
+
+loadNGOProfile();
+
+</script>
+
+</body>
+
+</html>

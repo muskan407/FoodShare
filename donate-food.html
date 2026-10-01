@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donate Food - FoodShare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+</body>
+    <!-- ==================== DONATE FOOD PAGE ==================== -->
+
+    <div class="donate-page">
+
+        <header class="donate-header">
+
+            <a href="donor-dashboard.html" class="donate-logo">
+                FoodShare
+            </a>
+
+            <a href="donor-dashboard.html" class="back-dashboard">
+                ← Dashboard
+            </a>
+
+        </header>
+
+
+        <main class="donate-main">
+
+            <div class="donate-intro">
+
+                <h1>Donate Food</h1>
+
+                <p>
+                    Share your surplus food with people who need it.
+                    Every donation can make a difference.
+                </p>
+
+            </div>
+
+
+            <!-- ==================== DONATION FORM ==================== -->
+
+            <form class="donation-form" id="donationForm">
+
+                <!-- Food Information -->
+
+                <section class="donation-form-section">
+
+                    <h2>Food Information</h2>
+
+                    <p class="form-section-description">
+                        Tell us about the food you want to donate.
+                    </p>
+
+
+                    <div class="donate-form-grid">
+
+                        <div class="donate-form-group">
+
+                            <label for="food-name">
+                                Food Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="food-name"
+                                name="food-name"
+                                placeholder="Example: Rice and Dal"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="donate-form-group">
+
+                            <label for="food-category">
+                                Food Category
+                            </label>
+
+                            <select
+                                id="food-category"
+                                name="food-category"
+                                required
+                            >
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="cooked">
+                                    Cooked Food
+                                </option>
+
+                                <option value="packed">
+                                    Packaged Food
+                                </option>
+
+                                <option value="fruits">
+                                    Fruits
+                                </option>
+
+                                <option value="vegetables">
+                                    Vegetables
+                                </option>
+
+                                <option value="bakery">
+                                    Bakery Items
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="donate-form-group">
+
+                            <label for="quantity">
+                                Quantity / Number of Meals
+                            </label>
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                placeholder="Example: 20"
+                                min="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="donate-form-group">
+
+                            <label for="prepared-date">
+                                Prepared / Packed Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="prepared-date"
+                                name="prepared-date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="donate-form-group">
+
+                            <label for="best-before">
+                                Best Before
+                            </label>
+
+                            <input
+                                type="datetime-local"
+                                id="best-before"
+                                name="best-before"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="donate-form-group">
+
+                        <label for="food-description">
+                            Food Description
+                        </label>
+
+                        <textarea
+                            id="food-description"
+                            name="food-description"
+                            rows="4"
+                            placeholder="Describe the food, ingredients, packaging, etc."
+                        ></textarea>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ==================== PICKUP INFORMATION ==================== -->
+
+                <section class="donation-form-section">
+
+                    <h2>Pickup Information</h2>
+
+                    <p class="form-section-description">
+                        Provide the location where the NGO can collect the food.
+                    </p>
+
+
+                    <div class="donate-form-group">
+
+                        <label for="pickup-address">
+                            Pickup Address
+                        </label>
+
+                        <textarea
+                            id="pickup-address"
+                            name="pickup-address"
+                            rows="3"
+                            placeholder="Enter complete pickup address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="donate-form-grid">
+
+                        <div class="donate-form-group">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter city"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="donate-form-group">
+
+                            <label for="contact-number">
+                                Contact Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="contact-number"
+                                name="contact-number"
+                                placeholder="Enter contact number"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ==================== FOOD IMAGE ==================== -->
+
+                <section class="donation-form-section">
+
+                    <h2>Food Image</h2>
+
+                    <p class="form-section-description">
+                        Upload a clear image of the food.
+                    </p>
+
+                    <div class="food-image-upload">
+
+                        <label for="food-image">
+                            Choose Food Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="food-image"
+                            name="food-image"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                </section>
+
+
+                <!-- ==================== SAFETY ==================== -->
+
+                <section class="donation-safety">
+
+                    <h3>Food Safety Confirmation</h3>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            required
+                        >
+
+                        I confirm that the food is safe for consumption
+                        and has been stored properly.
+
+                    </label>
+
+                </section>
+
+
+                <!-- ==================== SUBMIT ==================== -->
+
+                <button
+                    type="submit"
+                    class="submit-donation-button"
+                >
+                    Submit Food Donation
+                </button>
+
+        </form>
+
+</main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

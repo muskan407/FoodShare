@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver Dashboard - FoodShare</title>
+    <meta name="description" content="Receiver dashboard to request food and view available donations near you on FoodShare.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" aria-label="FoodShare home"><strong>FoodShare</strong></a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+            </ul>
+            <a href="login.html" role="button">My Account</a>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <div class="dashboard-header">
+            <div>
+                <h1>Receiver Dashboard</h1>
+                <p id="welcome-text">Welcome!</p>
+            </div>
+            <button type="button" class="btn-outline" id="logout-button">Logout</button>
+        </div>
+
+        <div class="dashboard-cards">
+            <article>
+                <h2>Available Food</h2>
+                <p>Browse fresh donations shared near your location right now.</p>
+            </article>
+            <article>
+                <h2>Request Food</h2>
+                <p>Send a request and we will match you with the closest available donation.</p>
+            </article>
+            <article>
+                <h2>My Requests</h2>
+                <p>Check the status of your food requests and pickup details.</p>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FoodShare. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
